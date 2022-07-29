@@ -29,14 +29,14 @@ export const truthyString = (string) => Boolean(string?.length);
 export const truthyDigitString = (string) =>
   truthyString(string) && Boolean(string.match(/^\d+$/u));
 
-export function validateData(validators, object, urlUsed) {
+export function validateData(validators, object, urlUsed, logError = true) {
   return validators.every(({ property, type, validator }) => {
     const types = type.split('|');
 
     const valid =
       types.some((_type) => typeof object[property] === _type) &&
       (!validator || validator(object[property]));
-    if (!valid) {
+    if (!valid && logError) {
       log.error(
         `response to GET ${urlUsed} invalid for property ${property}; value was:`,
         object[property],
@@ -224,7 +224,7 @@ export function addHexPrefixToObjectValues(obj) {
  * @param {string} options.from - A hex address of the tx sender address
  * @param {string} options.gas - A hex representation of the gas value for the transaction
  * @param {string} options.gasPrice - A hex representation of the gas price for the transaction
- * @returns {Object} An object ready for submission to the blockchain, with all values appropriately hex prefixed
+ * @returns {object} An object ready for submission to the blockchain, with all values appropriately hex prefixed
  */
 export function constructTxParams({
   sendToken,

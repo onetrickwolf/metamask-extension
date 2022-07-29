@@ -90,9 +90,7 @@ import {
 } from '../../shared/constants/app';
 import { EVENT, EVENT_NAMES } from '../../shared/constants/metametrics';
 
-import {
-  getTokenIdParam,
-} from '../../ui/helpers/utils/token-util';
+import { getTokenIdParam } from '../../ui/helpers/utils/token-util';
 import { isEqualCaseInsensitive } from '../../shared/modules/string-utils';
 import { parseStandardTokenTransactionData } from '../../shared/modules/transaction.utils';
 import {

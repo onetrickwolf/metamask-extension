@@ -1,7 +1,4 @@
-import {
-  fetchLocale,
-  getErrorHtml,
-} from './error-utils';
+import { fetchLocale, getErrorHtml } from './error-utils';
 import { SUPPORT_LINK } from './ui-utils';
 
 jest.mock('./error-utils', () => {
@@ -11,11 +8,11 @@ jest.mock('./error-utils', () => {
     ...originalModule,
     loadRelativeTimeFormatLocaleData: jest.fn(),
     fetchLocale: jest.fn(),
-  }
+  };
 });
 
-describe('Error utils Tests', () => {
-  it('should get error html', async () => {
+describe('Error utils Tests', function () {
+  it('should get error html', async function () {
     const mockStore = {
       localeMessages: {
         current: {

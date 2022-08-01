@@ -69,6 +69,16 @@ export const TYPOGRAPHY = {
   Paragraph: 'p',
 };
 
+export const TYPOGRAPHY_V2 = {
+  DISPLAY_MD: 'display-md',
+  HEADING_SM: 'heading-sm',
+  HEADING_MD: 'heading-md',
+  HEADING_LG: 'heading-lg',
+  BODY_XS: 'body-xs',
+  BODY_SM: 'body-sm',
+  BODY_MD: 'body-md',
+};
+
 const NONE = 'none';
 
 export const SIZES = {

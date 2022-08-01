@@ -1,4 +1,5 @@
-import { ethers } from 'ethers';
+import { Web3Provider } from '@ethersproject/providers';
+import { Contract } from '@ethersproject/contracts';
 import log from 'loglevel';
 import BigNumber from 'bignumber.js';
 import { ObservableStore } from '@metamask/obs-store';
@@ -90,8 +91,7 @@ const initialState = {
     swapsQuoteRefreshTime: FALLBACK_QUOTE_REFRESH_TIME,
     swapsQuotePrefetchingRefreshTime: FALLBACK_QUOTE_REFRESH_TIME,
     swapsStxBatchStatusRefreshTime: FALLBACK_SMART_TRANSACTIONS_REFRESH_TIME,
-    swapsStxGetTransactionsRefreshTime:
-      FALLBACK_SMART_TRANSACTIONS_REFRESH_TIME,
+    swapsStxGetTransactionsRefreshTime: FALLBACK_SMART_TRANSACTIONS_REFRESH_TIME,
     swapsStxMaxFeeMultiplier: FALLBACK_SMART_TRANSACTIONS_MAX_FEE_MULTIPLIER,
     swapsFeatureFlags: {},
   },
@@ -124,12 +124,12 @@ export default class SwapsController {
 
     this.indexOfNewestCallInFlight = 0;
 
-    this.ethersProvider = new ethers.providers.Web3Provider(provider);
+    this.ethersProvider = new Web3Provider(provider);
     this._currentNetwork = networkController.store.getState().network;
     networkController.on(NETWORK_EVENTS.NETWORK_DID_CHANGE, (network) => {
       if (network !== 'loading' && network !== this._currentNetwork) {
         this._currentNetwork = network;
-        this.ethersProvider = new ethers.providers.Web3Provider(provider);
+        this.ethersProvider = new Web3Provider(provider);
       }
     });
   }
@@ -337,8 +337,10 @@ export default class SwapsController {
     if (Object.values(newQuotes).length === 0) {
       this.setSwapsErrorKey(QUOTES_NOT_AVAILABLE_ERROR);
     } else {
-      const [_topAggId, quotesWithSavingsAndFeeData] =
-        await this._findTopQuoteAndCalculateSavings(newQuotes);
+      const [
+        _topAggId,
+        quotesWithSavingsAndFeeData,
+      ] = await this._findTopQuoteAndCalculateSavings(newQuotes);
       topAggId = _topAggId;
       newQuotes = quotesWithSavingsAndFeeData;
     }
@@ -485,8 +487,10 @@ export default class SwapsController {
 
     const quoteToUpdate = { ...swapsState.quotes[initialAggId] };
 
-    const { gasLimit: newGasEstimate, simulationFails } =
-      await this.timedoutGasReturn(quoteToUpdate.trade);
+    const {
+      gasLimit: newGasEstimate,
+      simulationFails,
+    } = await this.timedoutGasReturn(quoteToUpdate.trade);
 
     if (newGasEstimate && !simulationFails) {
       const gasEstimateWithRefund = calculateGasEstimateWithRefund(
@@ -634,8 +638,9 @@ export default class SwapsController {
   }
 
   async _findTopQuoteAndCalculateSavings(quotes = {}) {
-    const { contractExchangeRates: tokenConversionRates } =
-      this.getTokenRatesState();
+    const {
+      contractExchangeRates: tokenConversionRates,
+    } = this.getTokenRatesState();
     const {
       swapsState: { customGasPrice, customMaxPriorityFeePerGas },
     } = this.store.getState();
@@ -648,8 +653,10 @@ export default class SwapsController {
 
     const newQuotes = cloneDeep(quotes);
 
-    const { gasFeeEstimates, gasEstimateType } =
-      await this._getEIP1559GasFeeEstimates();
+    const {
+      gasFeeEstimates,
+      gasEstimateType,
+    } = await this._getEIP1559GasFeeEstimates();
 
     let usedGasPrice = '0x0';
 
@@ -750,8 +757,9 @@ export default class SwapsController {
       const tokenPercentageOfPreFeeDestAmount = new BigNumber(100, 10)
         .minus(metaMaskFee, 10)
         .div(100);
-      const destinationAmountBeforeMetaMaskFee =
-        decimalAdjustedDestinationAmount.div(tokenPercentageOfPreFeeDestAmount);
+      const destinationAmountBeforeMetaMaskFee = decimalAdjustedDestinationAmount.div(
+        tokenPercentageOfPreFeeDestAmount,
+      );
       const metaMaskFeeInTokens = destinationAmountBeforeMetaMaskFee.minus(
         decimalAdjustedDestinationAmount,
       );
@@ -860,11 +868,7 @@ export default class SwapsController {
   }
 
   async _getERC20Allowance(contractAddress, walletAddress, chainId) {
-    const contract = new ethers.Contract(
-      contractAddress,
-      abi,
-      this.ethersProvider,
-    );
+    const contract = new Contract(contractAddress, abi, this.ethersProvider);
     return await contract.allowance(
       walletAddress,
       SWAPS_CHAINID_CONTRACT_ADDRESS_MAP[chainId],

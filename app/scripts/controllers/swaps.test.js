@@ -1,9 +1,9 @@
 import { strict as assert } from 'assert';
 import sinon from 'sinon';
 
-import { ethers } from 'ethers';
+import { BigNumber } from '@ethersproject/bignumber';
 import { mapValues } from 'lodash';
-import BigNumber from 'bignumber.js';
+import BigNumberjs from 'bignumber.js';
 import {
   ROPSTEN_NETWORK_ID,
   MAINNET_NETWORK_ID,
@@ -42,7 +42,8 @@ const TEST_AGG_ID_APPROVAL = 'TEST_AGG_APPROVAL';
 const POLLING_TIMEOUT = SECOND * 1000;
 
 const MOCK_APPROVAL_NEEDED = {
-  data: '0x095ea7b300000000000000000000000095e6f48254609a6ee006f7d493c8e5fb97094cef0000000000000000000000000000000000000000004a817c7ffffffdabf41c00',
+  data:
+    '0x095ea7b300000000000000000000000095e6f48254609a6ee006f7d493c8e5fb97094cef0000000000000000000000000000000000000000004a817c7ffffffdabf41c00',
   to: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
   amount: '0',
   from: '0x2369267687A84ac7B494daE2f1542C40E37f4455',
@@ -138,8 +139,7 @@ const EMPTY_INIT_STATE = {
     swapsQuoteRefreshTime: 60000,
     swapsQuotePrefetchingRefreshTime: 60000,
     swapsStxBatchStatusRefreshTime: FALLBACK_SMART_TRANSACTIONS_REFRESH_TIME,
-    swapsStxGetTransactionsRefreshTime:
-      FALLBACK_SMART_TRANSACTIONS_REFRESH_TIME,
+    swapsStxGetTransactionsRefreshTime: FALLBACK_SMART_TRANSACTIONS_REFRESH_TIME,
     swapsStxMaxFeeMultiplier: FALLBACK_SMART_TRANSACTIONS_MAX_FEE_MULTIPLIER,
     swapsUserFeeLevel: '',
     saveFetchedQuotes: false,
@@ -370,14 +370,17 @@ describe('SwapsController', function () {
           baseGasEstimate,
         );
 
-        const { gasLimit: bufferedGasLimit } =
-          await swapsController.getBufferedGasLimit();
-        const { gasEstimate, gasEstimateWithRefund } =
-          swapsController.store.getState().swapsState.quotes[initialAggId];
+        const {
+          gasLimit: bufferedGasLimit,
+        } = await swapsController.getBufferedGasLimit();
+        const {
+          gasEstimate,
+          gasEstimateWithRefund,
+        } = swapsController.store.getState().swapsState.quotes[initialAggId];
         assert.strictEqual(gasEstimate, bufferedGasLimit);
         assert.strictEqual(
           gasEstimateWithRefund,
-          `0x${new BigNumber(maxGas, 10)
+          `0x${new BigNumberjs(maxGas, 10)
             .minus(estimatedRefund, 10)
             .toString(16)}`,
         );
@@ -413,10 +416,12 @@ describe('SwapsController', function () {
       });
 
       it('returns the top aggId and quotes with savings and fee values if passed necessary data and an even number of quotes', async function () {
-        const [topAggId, resultQuotes] =
-          await swapsController._findTopQuoteAndCalculateSavings(
-            getTopQuoteAndSavingsMockQuotes(),
-          );
+        const [
+          topAggId,
+          resultQuotes,
+        ] = await swapsController._findTopQuoteAndCalculateSavings(
+          getTopQuoteAndSavingsMockQuotes(),
+        );
         assert.equal(topAggId, TEST_AGG_ID_1);
         assert.deepStrictEqual(
           resultQuotes,
@@ -437,8 +442,10 @@ describe('SwapsController', function () {
           medianMetaMaskFee: '0.0202',
         };
 
-        const [topAggId, resultQuotes] =
-          await swapsController._findTopQuoteAndCalculateSavings(testInput);
+        const [
+          topAggId,
+          resultQuotes,
+        ] = await swapsController._findTopQuoteAndCalculateSavings(testInput);
         assert.equal(topAggId, TEST_AGG_ID_1);
         assert.deepStrictEqual(resultQuotes, expectedResultQuotes);
       });
@@ -478,8 +485,10 @@ describe('SwapsController', function () {
           },
         };
 
-        const [topAggId, resultQuotes] =
-          await swapsController._findTopQuoteAndCalculateSavings(testInput);
+        const [
+          topAggId,
+          resultQuotes,
+        ] = await swapsController._findTopQuoteAndCalculateSavings(testInput);
         assert.equal(topAggId, TEST_AGG_ID_1);
         assert.deepStrictEqual(resultQuotes, expectedResultQuotes);
       });
@@ -494,8 +503,7 @@ describe('SwapsController', function () {
             trade: { value: '0x8ac7230489e80000' },
           }),
         );
-        const baseExpectedResultQuotes =
-          getTopQuoteAndSavingsBaseExpectedResults();
+        const baseExpectedResultQuotes = getTopQuoteAndSavingsBaseExpectedResults();
         const expectedResultQuotes = {
           [TEST_AGG_ID_1]: {
             ...baseExpectedResultQuotes[TEST_AGG_ID_1],
@@ -541,8 +549,10 @@ describe('SwapsController', function () {
           },
         };
 
-        const [topAggId, resultQuotes] =
-          await swapsController._findTopQuoteAndCalculateSavings(testInput);
+        const [
+          topAggId,
+          resultQuotes,
+        ] = await swapsController._findTopQuoteAndCalculateSavings(testInput);
         assert.equal(topAggId, TEST_AGG_ID_1);
         assert.deepStrictEqual(resultQuotes, expectedResultQuotes);
       });
@@ -559,8 +569,7 @@ describe('SwapsController', function () {
         );
         // 0.04 ETH fee included in trade value
         testInput[TEST_AGG_ID_1].trade.value = '0x8b553ece48ec0000';
-        const baseExpectedResultQuotes =
-          getTopQuoteAndSavingsBaseExpectedResults();
+        const baseExpectedResultQuotes = getTopQuoteAndSavingsBaseExpectedResults();
         const expectedResultQuotes = {
           [TEST_AGG_ID_1]: {
             ...baseExpectedResultQuotes[TEST_AGG_ID_1],
@@ -617,8 +626,10 @@ describe('SwapsController', function () {
         delete expectedResultQuotes[TEST_AGG_ID_1].isBestQuote;
         delete expectedResultQuotes[TEST_AGG_ID_1].savings;
 
-        const [topAggId, resultQuotes] =
-          await swapsController._findTopQuoteAndCalculateSavings(testInput);
+        const [
+          topAggId,
+          resultQuotes,
+        ] = await swapsController._findTopQuoteAndCalculateSavings(testInput);
         assert.equal(topAggId, TEST_AGG_ID_2);
         assert.deepStrictEqual(resultQuotes, expectedResultQuotes);
       });
@@ -627,8 +638,7 @@ describe('SwapsController', function () {
         const testInput = getTopQuoteAndSavingsMockQuotes();
         // 0.04 ETH fee included in trade value
         testInput[TEST_AGG_ID_1].trade.value = '0x8e1bc9bf040000';
-        const baseExpectedResultQuotes =
-          getTopQuoteAndSavingsBaseExpectedResults();
+        const baseExpectedResultQuotes = getTopQuoteAndSavingsBaseExpectedResults();
         const expectedResultQuotes = {
           ...baseExpectedResultQuotes,
           [TEST_AGG_ID_1]: {
@@ -652,8 +662,10 @@ describe('SwapsController', function () {
         delete expectedResultQuotes[TEST_AGG_ID_1].isBestQuote;
         delete expectedResultQuotes[TEST_AGG_ID_1].savings;
 
-        const [topAggId, resultQuotes] =
-          await swapsController._findTopQuoteAndCalculateSavings(testInput);
+        const [
+          topAggId,
+          resultQuotes,
+        ] = await swapsController._findTopQuoteAndCalculateSavings(testInput);
         assert.equal(topAggId, TEST_AGG_ID_2);
         assert.deepStrictEqual(resultQuotes, expectedResultQuotes);
       });
@@ -671,7 +683,7 @@ describe('SwapsController', function () {
         // Make it so approval is not required
         sandbox
           .stub(swapsController, '_getERC20Allowance')
-          .resolves(ethers.BigNumber.from(1));
+          .resolves(BigNumber.from(1));
 
         const [newQuotes] = await swapsController.fetchAndSetQuotes(
           MOCK_FETCH_PARAMS,
@@ -715,7 +727,7 @@ describe('SwapsController', function () {
         // Make it so approval is not required
         const allowanceStub = sandbox
           .stub(swapsController, '_getERC20Allowance')
-          .resolves(ethers.BigNumber.from(1));
+          .resolves(BigNumber.from(1));
 
         await swapsController.fetchAndSetQuotes(
           MOCK_FETCH_PARAMS,
@@ -738,7 +750,7 @@ describe('SwapsController', function () {
         // Ensure approval is required
         sandbox
           .stub(swapsController, '_getERC20Allowance')
-          .resolves(ethers.BigNumber.from(0));
+          .resolves(BigNumber.from(0));
 
         const timedoutGasReturnResult = { gasLimit: 1000000 };
         const timedoutGasReturnStub = sandbox
@@ -763,7 +775,7 @@ describe('SwapsController', function () {
         // Make it so approval is not required
         sandbox
           .stub(swapsController, '_getERC20Allowance')
-          .resolves(ethers.BigNumber.from(1));
+          .resolves(BigNumber.from(1));
 
         const [newQuotes, topAggId] = await swapsController.fetchAndSetQuotes(
           MOCK_FETCH_PARAMS,
@@ -781,7 +793,7 @@ describe('SwapsController', function () {
         const bestQuote = {
           ...getMockQuotes()[TEST_AGG_ID_1],
           aggregator: bestAggId,
-          destinationAmount: ethers.BigNumber.from(
+          destinationAmount: BigNumber.from(
             getMockQuotes()[TEST_AGG_ID_1].destinationAmount,
           )
             .add((100e18).toString())
@@ -793,7 +805,7 @@ describe('SwapsController', function () {
         // Make it so approval is not required
         sandbox
           .stub(swapsController, '_getERC20Allowance')
-          .resolves(ethers.BigNumber.from(1));
+          .resolves(BigNumber.from(1));
 
         const [newQuotes, topAggId] = await swapsController.fetchAndSetQuotes(
           MOCK_FETCH_PARAMS,
@@ -810,7 +822,7 @@ describe('SwapsController', function () {
         // Make it so approval is not required
         sandbox
           .stub(swapsController, '_getERC20Allowance')
-          .resolves(ethers.BigNumber.from(1));
+          .resolves(BigNumber.from(1));
 
         swapsController.getTokenRatesState = () => ({
           contractExchangeRates: {},

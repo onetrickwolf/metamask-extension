@@ -1,4 +1,6 @@
-const { ethers } = require('ethers');
+const { Web3Provider } = require('@ethersproject/providers');
+const { ContractFactory } = require('@ethersproject/contracts');
+
 const ganache = require('ganache');
 const { contractConfiguration } = require('./smart-contracts');
 const GanacheContractAddressRegistry = require('./ganache-contract-address-registry');
@@ -23,11 +25,8 @@ class GanacheSeeder {
       console.log('Deploying smart contracts using GanacheSeeder');
     }
 
-    const ethersProvider = new ethers.providers.Web3Provider(
-      ganache.provider(),
-      'any',
-    );
-    const contractFactory = new ethers.ContractFactory(
+    const ethersProvider = new Web3Provider(ganache.provider(), 'any');
+    const contractFactory = new ContractFactory(
       contractConfiguration[contractName].abi,
       contractConfiguration[contractName].bytecode,
       ethersProvider.getSigner(),

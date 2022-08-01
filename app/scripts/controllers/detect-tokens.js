@@ -1,4 +1,5 @@
-import { ethers } from 'ethers';
+import { Web3Provider } from '@ethersproject/providers';
+import { Contract } from '@ethersproject/contracts';
 import { warn } from 'loglevel';
 import SINGLE_CALL_BALANCES_ABI from 'single-call-balance-checker-abi';
 import { SINGLE_CALL_BALANCES_ADDRESS } from '../constants/contracts';
@@ -89,7 +90,7 @@ export default class DetectTokensController {
    * @param tokens
    */
   async _getTokenBalances(tokens) {
-    const ethContract = new ethers.Contract(
+    const ethContract = new Contract(
       SINGLE_CALL_BALANCES_ADDRESS,
       SINGLE_CALL_BALANCES_ABI,
       this.ethersProvider,
@@ -131,9 +132,7 @@ export default class DetectTokensController {
     }
 
     const tokensToDetect = [];
-    this.ethersProvider = new ethers.providers.Web3Provider(
-      this._network._provider,
-    );
+    this.ethersProvider = new Web3Provider(this._network._provider);
     for (const tokenAddress in tokenList) {
       if (
         !this.tokenAddresses.find((address) =>
@@ -176,8 +175,13 @@ export default class DetectTokensController {
         if (result) {
           const nonZeroTokenAddresses = Object.keys(result);
           for (const nonZeroTokenAddress of nonZeroTokenAddresses) {
-            const { address, symbol, decimals, iconUrl, aggregators } =
-              tokenList[nonZeroTokenAddress];
+            const {
+              address,
+              symbol,
+              decimals,
+              iconUrl,
+              aggregators,
+            } = tokenList[nonZeroTokenAddress];
 
             eventTokensDetails.push(`${symbol} - ${address}`);
 
@@ -256,7 +260,7 @@ export default class DetectTokensController {
       return;
     }
     this._network = network;
-    this.ethersProvider = new ethers.providers.Web3Provider(network._provider);
+    this.ethersProvider = new Web3Provider(network._provider);
   }
 
   /**

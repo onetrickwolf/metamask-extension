@@ -71,12 +71,12 @@ export const TYPOGRAPHY = {
 
 export const TYPOGRAPHY_V2 = {
   DISPLAY_MD: 'display-md',
-  HEADING_SM: 'heading-sm',
-  HEADING_MD: 'heading-md',
   HEADING_LG: 'heading-lg',
-  BODY_XS: 'body-xs',
-  BODY_SM: 'body-sm',
+  HEADING_MD: 'heading-md',
+  HEADING_SM: 'heading-sm',
   BODY_MD: 'body-md',
+  BODY_SM: 'body-sm',
+  BODY_XS: 'body-xs',
 };
 
 const NONE = 'none';
@@ -191,6 +191,7 @@ export const TEXT_ALIGN = {
 
 export const FONT_WEIGHT = {
   BOLD: 'bold',
+  MEDIUM: 'medium',
   NORMAL: 'normal',
 };
 

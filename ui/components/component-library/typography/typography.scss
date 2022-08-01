@@ -1,56 +1,82 @@
 @use "design-system";
 @use "sass:map";
 
-.typography {
-  @include design-system.Paragraph;
+$text-variants: (
+  display: ("md"),
+  heading: ( "sm", "md", "lg"),
+  body: ("xs", "sm", "md"),
+);
 
-  & b,
-  & strong {
-    font-weight: 700;
+// Variable output mixin
+// screen size, type, size
+
+@mixin textVariables($type, $size) {
+  font-family: var(--typography-s-#{$type}-#{$size}-font-family);
+  font-weight: var(--typography-s-#{$type}-#{$size}-font-weight);
+  font-size: var(--typography-s-#{$type}-#{$size}-font-size);
+  line-height: var(--typography-s-#{$type}-#{$size}-line-height);
+  letter-spacing: var(--typography-s-#{$type}-#{$size}-letter-spacing);
+
+  @include screen-lg-min {
+    font-family: var(--typography-l-#{$type}-#{$size}-font-family);
+    font-weight: var(--typography-l-#{$type}-#{$size}-font-weight);
+    font-size: var(--typography-l-#{$type}-#{$size}-font-size);
+    line-height: var(--typography-l-#{$type}-#{$size}-line-height);
+    letter-spacing: var(--typography-l-#{$type}-#{$size}-letter-spacing);
   }
+}
 
-  @each $variant in map.keys(design-system.$typography-variants) {
-    &--#{$variant} {
-      @include design-system.typography($variant);
+
+
+.text {
+  @each $type, $size-options in $text-variants {
+    &--#{$type} {
+      // Sets a default
+      @include textVariables($type, "md");
+      // Generates all the size options
+      @each $size in $size-options {
+        &-#{$size} {
+          @include textVariables($type, $size);
+        }
+      }
     }
   }
 
-  @each $variant, $color in design-system.$color-map {
+  @each $variant, $color in $color-map {
     &--color-#{$variant} {
       color: var($color);
     }
   }
 
-  @each $weight in design-system.$font-weight {
+  @each $weight in $font-weight {
     &--weight-#{$weight} {
       font-weight: $weight;
     }
   }
 
-  @each $style in design-system.$font-style {
+  @each $style in $font-style {
     &--style-#{$style} {
       font-style: $style;
     }
   }
 
-  @each $alignment in design-system.$text-align {
+  @each $alignment in $text-align {
     &--align-#{$alignment} {
       text-align: $alignment;
     }
   }
 
-  @each $overflow in design-system.$overflow-wrap {
+  @each $overflow in $overflow-wrap {
     &--overflowwrap-#{$overflow} {
       overflow-wrap: $overflow;
     }
   }
 
-  @for $i from 1 through 8 {
-    &--spacing-#{$i} {
-      margin: #{$i * 4}px auto;
-    }
+  &--ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
-
 
 

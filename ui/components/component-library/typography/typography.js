@@ -11,8 +11,6 @@ import {
 } from '../../../helpers/constants/design-system';
 import Box, { MultipleSizesAndAuto } from '../../ui/box';
 
-// const {} = TYPOGRAPHY_V2;
-
 export const ValidColors = [
   COLORS.TEXT_DEFAULT,
   COLORS.TEXT_ALTERNATIVE,
@@ -49,13 +47,14 @@ export const ValidTags = [
   'ul',
 ];
 
-export default function Typography({
+export const Typography = ({
   variant = TYPOGRAPHY_V2.BODY_MD,
   color = COLORS.TEXT_DEFAULT,
-  fontWeight = 'normal',
-  fontStyle = 'normal',
+  fontWeight,
+  fontStyle,
   align,
   overflowWrap,
+  ellipsis,
   title,
   tag,
   margin,
@@ -66,7 +65,7 @@ export default function Typography({
   boxProps = {},
   className,
   children,
-}) {
+}) => {
   let Tag = tag ?? variant;
   let strongTagFontWeight;
 
@@ -78,13 +77,14 @@ export default function Typography({
     'text',
     className,
     `text--${variant}`,
-    // `typography--weight-${strongTagFontWeight || fontWeight}`,
-    // `typography--style-${fontStyle}`,
-    // {
-    //   [`typography--align-${align}`]: Boolean(align),
-    //   [`typography--color-${color}`]: Boolean(color),
-    //   [`typography--overflowwrap-${overflowWrap}`]: Boolean(overflowWrap),
-    // },
+    `text--weight-${strongTagFontWeight || fontWeight}`,
+    `text--style-${fontStyle}`,
+    { [`text--ellipsis`]: Boolean(ellipsis) },
+    {
+      [`text--align-${align}`]: Boolean(align),
+      [`text--color-${color}`]: Boolean(color),
+      [`text--overflowwrap-${overflowWrap}`]: Boolean(overflowWrap),
+    },
   );
 
   // Set a default tag based on variant
@@ -123,7 +123,7 @@ export default function Typography({
       )}
     </Box>
   );
-}
+};
 
 Typography.propTypes = {
   /**
@@ -156,6 +156,10 @@ Typography.propTypes = {
    */
   overflowWrap: PropTypes.oneOf(Object.values(OVERFLOW_WRAP)),
   /**
+   * Used for long strings that can be cut off (...)
+   */
+  ellipsis: PropTypes.bool,
+  /**
    * Changes the root html element tag of the Typography component.
    */
   tag: PropTypes.oneOf(ValidTags),
@@ -187,3 +191,5 @@ Typography.propTypes = {
    */
   children: PropTypes.node.isRequired,
 };
+
+export default Typography;

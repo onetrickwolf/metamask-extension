@@ -4,21 +4,19 @@ import {
   FONT_WEIGHT,
   FONT_STYLE,
   TEXT_ALIGN,
-  TYPOGRAPHY,
-  TEXT,
+  TYPOGRAPHY_V2,
   OVERFLOW_WRAP,
 } from '../../../helpers/constants/design-system';
 
-import { ValidColors, ValidTags } from './typography';
+import { ValidColors, ValidTags, Typography } from './typography';
 
 import README from './README.mdx';
-import Typography from '.';
 
 const sizeKnobOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const marginSizeKnobOptions = [...sizeKnobOptions, 'auto'];
 
 export default {
-  title: 'Components/UI2/Typography2',
+  title: 'Components/ComponentLibrary/Typography',
   id: __filename,
   parameters: {
     docs: {
@@ -28,7 +26,7 @@ export default {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: Object.values(TEXT),
+      options: Object.values(TYPOGRAPHY_V2),
     },
     color: {
       control: { type: 'select' },
@@ -49,6 +47,9 @@ export default {
     overflowWrap: {
       control: { type: 'select' },
       options: Object.values(OVERFLOW_WRAP),
+    },
+    ellipsis: {
+      control: { type: 'boolean' },
     },
     tag: {
       control: { type: 'select' },
@@ -119,7 +120,7 @@ DefaultStory.args = {
 
 export const Variant = (args) => (
   <>
-    {Object.values(TYPOGRAPHY).map((variant) => (
+    {Object.values(TYPOGRAPHY_V2).map((variant) => (
       <Typography
         boxProps={{ backgroundColor: renderBackgroundColor(args.color) }}
         {...args}
@@ -246,6 +247,23 @@ export const OverflowWrap = (args) => (
     </Typography>
     <Typography {...args} overflowWrap={OVERFLOW_WRAP.BREAK_WORD}>
       {OVERFLOW_WRAP.BREAK_WORD}: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
+    </Typography>
+  </div>
+);
+
+export const Ellipsis = (args) => (
+  <div
+    style={{
+      width: 250,
+      border: '1px solid var(--color-primary-default)',
+      display: 'block',
+    }}
+  >
+    <Typography {...args} ellipsis>
+      Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
+    </Typography>
+    <Typography {...args} overflowWrap={OVERFLOW_WRAP.BREAK_WORD}>
+      No Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
     </Typography>
   </div>
 );

@@ -1,13 +1,15 @@
 import { Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 import ActionableMessage from '../../ui/actionable-message';
-import Typography from '.';
+import Typography from './typography';
 
-# Typography
+# Typography V2
+
+> This Typography component has breaking changes in variant options and the line heights associated to each variant.
 
 Good typography improves readability, legibility and hierarchy of information.
 
 <Canvas>
-  <Story id="ui-components-ui-typography-typography-stories-js--default-story" />
+  <Story id="ui-components-component-library-typography-typography-stories-js--default-story" />
 </Canvas>
 
 ## Props
@@ -20,10 +22,10 @@ The following describes the props and example usage for this component.
 
 ### Variant
 
-Use the `variant` prop and the `TYPOGRAPHY` object from `./ui/helpers/constants/design-system.js` to change the font size of the Typography component.
+Use the `variant` prop and the `TYPOGRAPHY_V2` object from `./ui/helpers/constants/design-system.js` to change the font size of the Typography component.
 
 <Canvas>
-  <Story id="ui-components-ui-typography-typography-stories-js--variant" />
+  <Story id="ui-components-component-library-typography-typography-stories-js--variant" />
 </Canvas>
 
 ```jsx
@@ -31,16 +33,15 @@ Use the `variant` prop and the `TYPOGRAPHY` object from `./ui/helpers/constants/
 import Typography from '../../ui/typography';
 import { TYPOGRAPHY} from '../../../helpers/constants/design-system';
 
-<Typography variant="TYPOGRAPHY.H1">h1</Typography>
-<Typography variant="TYPOGRAPHY.H2">h2</Typography>
-<Typography variant="TYPOGRAPHY.H3">h3</Typography>
-<Typography variant="TYPOGRAPHY.H4">h4</Typography>
-<Typography variant="TYPOGRAPHY.H5">h5</Typography>
-<Typography variant="TYPOGRAPHY.H6">h6</Typography>
-<Typography variant="TYPOGRAPHY.H7">h7</Typography>
-<Typography variant="TYPOGRAPHY.H8">h8</Typography>
-<Typography variant="TYPOGRAPHY.H9">h9</Typography>
-<Typography variant="TYPOGRAPHY.Paragraph">p</Typography>
+
+<Typography variant="DISPLAY_MD">display-md</Typography>
+<Typography variant="HEADING_LG">heading-lg</Typography>
+<Typography variant="HEADING_MD">heading-md</Typography>
+<Typography variant="HEADING_SM">heading-sm</Typography>
+<Typography variant="BODY_MD">body-md</Typography>
+<Typography variant="BODY_SM">body-sm</Typography>
+<Typography variant="BODY_XS">body-xs</Typography>
+
 ```
 
 ### Color
@@ -53,7 +54,7 @@ Use the `color` prop and the `COLOR` object from `./ui/helpers/constants/design-
 />
 
 <Canvas>
-  <Story id="ui-components-ui-typography-typography-stories-js--color" />
+  <Story id="ui-components-component-library-typography-typography-stories-js--color" />
 </Canvas>
 
 ```jsx
@@ -116,7 +117,7 @@ Use the `fontWeight` prop and the `FONT_WEIGHT` object from `./ui/helpers/consta
 - `FONT_WEIGHT.BOLD` = `bold` || `700`
 
 <Canvas>
-  <Story id="ui-components-ui-typography-typography-stories-js--font-weight" />
+  <Story id="ui-components-component-library-typography-typography-stories-js--font-weight" />
 </Canvas>
 
 ```jsx
@@ -140,7 +141,7 @@ Use the `fontStyle` prop and the `FONT_STYLE` object from `./ui/helpers/constant
 - `FONT_STYLE.ITALIC`
 
 <Canvas>
-  <Story id="ui-components-ui-typography-typography-stories-js--font-style" />
+  <Story id="ui-components-component-library-typography-typography-stories-js--font-style" />
 </Canvas>
 
 ```jsx
@@ -161,7 +162,7 @@ import { FONT_STYLE } from '../../../helpers/constants/design-system';
 Use the `align` prop and the `TEXT_ALIGN` object from `./ui/helpers/constants/design-system.js` to change the text alignment of the Typography component.
 
 <Canvas>
-  <Story id="ui-components-ui-typography-typography-stories-js--align" />
+  <Story id="ui-components-component-library-typography-typography-stories-js--align" />
 </Canvas>
 
 ```jsx
@@ -191,7 +192,7 @@ import { TEXT_ALIGN } from '../../../helpers/constants/design-system';
 Use the `overflowWrap` prop and the `OVERFLOW_WRAP` object from `./ui/helpers/constants/design-system.js` to change the overflow wrap of the Typography component.
 
 <Canvas>
-  <Story id="ui-components-ui-typography-typography-stories-js--overflow-wrap" />
+  <Story id="ui-components-component-library-typography-typography-stories-js--overflow-wrap" />
 </Canvas>
 
 ```jsx
@@ -220,7 +221,7 @@ import { OVERFLOW_WRAP } from '../../../helpers/constants/design-system';
 Use the `tag` prop to change the root html element of the Typography component
 
 <Canvas>
-  <Story id="ui-components-ui-typography-typography-stories-js--tag" />
+  <Story id="ui-components-component-library-typography-typography-stories-js--tag" />
 </Canvas>
 
 ```jsx
@@ -247,18 +248,31 @@ Renders the html:
 
 ```html
 <dd>dd</dd>
+
 <div>div</div>
+
 <dt>dt</dt>
+
 <em>em</em>
+
 <h1>h1</h1>
+
 <h2>h2</h2>
+
 <h3>h3</h3>
+
 <h4>h4</h4>
+
 <h5>h5</h5>
+
 <h6>h6</h6>
+
 <li>li</li>
+
 <p>p</p>
+
 <span>span</span>
+
 <strong>strong</strong>
 ```
 
@@ -267,7 +281,7 @@ Renders the html:
 Use the `margin` prop to change margin of the Typography component. For more control over bounding box properties use the `boxProps` props object.
 
 <Canvas>
-  <Story id="ui-components-ui-typography-typography-stories-js--margin" />
+  <Story id="ui-components-component-library-typography-typography-stories-js--margin" />
 </Canvas>
 
 ```jsx
@@ -282,7 +296,7 @@ import Typography from '../../ui/typography';
 Use the `boxProps` prop object to pass any valid [Box](/?path=/story/ui-components-ui-box-box-stories-js--default-story) component props to the Typography component. `boxProps` will overwrite the `margin` prop
 
 <Canvas>
-  <Story id="ui-components-ui-typography-typography-stories-js--box-props" />
+  <Story id="ui-components-component-library-typography-typography-stories-js--box-props" />
 </Canvas>
 
 ```jsx

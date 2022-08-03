@@ -4,11 +4,12 @@ import {
   FONT_WEIGHT,
   FONT_STYLE,
   TEXT_ALIGN,
-  TYPOGRAPHY_V2,
+  TEXT,
   OVERFLOW_WRAP,
+  SIZES,
 } from '../../../helpers/constants/design-system';
 
-import { ValidColors, ValidTags, Typography } from './typography';
+import { ValidColors, ValidTags, Text } from './text';
 
 import README from './README.mdx';
 
@@ -16,7 +17,7 @@ const sizeKnobOptions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const marginSizeKnobOptions = [...sizeKnobOptions, 'auto'];
 
 export default {
-  title: 'Components/ComponentLibrary/Typography',
+  title: 'Components/ComponentLibrary/Text',
   id: __filename,
   parameters: {
     docs: {
@@ -26,7 +27,7 @@ export default {
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: Object.values(TYPOGRAPHY_V2),
+      options: Object.values(TEXT),
     },
     color: {
       control: { type: 'select' },
@@ -58,9 +59,6 @@ export default {
     margin: {
       options: marginSizeKnobOptions,
       control: 'select',
-    },
-    boxProps: {
-      control: 'object',
     },
     className: {
       control: { type: 'text' },
@@ -104,12 +102,9 @@ function renderBackgroundColor(color) {
 }
 
 export const DefaultStory = (args) => (
-  <Typography
-    boxProps={{ backgroundColor: renderBackgroundColor(args.color) }}
-    {...args}
-  >
+  <Text backgroundColor={renderBackgroundColor(args.color)} {...args}>
     {args.children}
-  </Typography>
+  </Text>
 );
 
 DefaultStory.storyName = 'Default';
@@ -120,15 +115,15 @@ DefaultStory.args = {
 
 export const Variant = (args) => (
   <>
-    {Object.values(TYPOGRAPHY_V2).map((variant) => (
-      <Typography
-        boxProps={{ backgroundColor: renderBackgroundColor(args.color) }}
+    {Object.values(TEXT).map((variant) => (
+      <Text
+        backgroundColor={renderBackgroundColor(args.color)}
         {...args}
         variant={variant}
         key={variant}
       >
         {args.children || variant}
-      </Typography>
+      </Text>
     ))}
   </>
 );
@@ -142,47 +137,45 @@ export const Color = (args) => {
         if (index === LAST_VALID_COLORS_ARRAY_INDEX) {
           return (
             <React.Fragment key={color}>
-              <Typography
+              <Text
                 color={COLORS.TEXT_DEFAULT}
                 align={TEXT_ALIGN.CENTER}
-                boxProps={{
-                  backgroundColor: COLORS.WARNING_MUTED,
-                  padding: 4,
-                  borderColor: COLORS.WARNING_DEFAULT,
-                }}
+                backgroundColor={COLORS.WARNING_MUTED}
+                padding={4}
+                borderColor={COLORS.WARNING_DEFAULT}
               >
                 DEPRECATED COLORS - DO NOT USE
-              </Typography>
-              <Typography
+              </Text>
+              <Text
                 {...args}
-                boxProps={{ backgroundColor: renderBackgroundColor(color) }}
+                backgroundColor={renderBackgroundColor(color)}
                 color={color}
               >
                 <strike>{color}</strike>
-              </Typography>
+              </Text>
             </React.Fragment>
           );
         } else if (index >= LAST_VALID_COLORS_ARRAY_INDEX) {
           return (
-            <Typography
+            <Text
               {...args}
-              boxProps={{ backgroundColor: renderBackgroundColor(color) }}
+              backgroundColor={renderBackgroundColor(color)}
               color={color}
               key={color}
             >
               <strike>{color}</strike>
-            </Typography>
+            </Text>
           );
         }
         return (
-          <Typography
+          <Text
             {...args}
-            boxProps={{ backgroundColor: renderBackgroundColor(color) }}
+            backgroundColor={renderBackgroundColor(color)}
             color={color}
             key={color}
           >
             {color}
-          </Typography>
+          </Text>
         );
       })}
     </>
@@ -192,14 +185,9 @@ export const Color = (args) => {
 export const FontWeight = (args) => (
   <>
     {Object.values(FONT_WEIGHT).map((weight) => (
-      <Typography
-        boxProps={{ backgroundColor: renderBackgroundColor(args.color) }}
-        {...args}
-        fontWeight={weight}
-        key={weight}
-      >
+      <Text {...args} fontWeight={weight} key={weight}>
         {weight}
-      </Typography>
+      </Text>
     ))}
   </>
 );
@@ -207,14 +195,9 @@ export const FontWeight = (args) => (
 export const FontStyle = (args) => (
   <>
     {Object.values(FONT_STYLE).map((style) => (
-      <Typography
-        boxProps={{ backgroundColor: renderBackgroundColor(args.color) }}
-        {...args}
-        fontStyle={style}
-        key={style}
-      >
+      <Text {...args} fontStyle={style} key={style}>
         {style}
-      </Typography>
+      </Text>
     ))}
   </>
 );
@@ -222,14 +205,9 @@ export const FontStyle = (args) => (
 export const Align = (args) => (
   <>
     {Object.values(TEXT_ALIGN).map((align) => (
-      <Typography
-        boxProps={{ backgroundColor: renderBackgroundColor(args.color) }}
-        {...args}
-        align={align}
-        key={align}
-      >
+      <Text {...args} align={align} key={align}>
         {align}
-      </Typography>
+      </Text>
     ))}
   </>
 );
@@ -242,12 +220,12 @@ export const OverflowWrap = (args) => (
       display: 'block',
     }}
   >
-    <Typography {...args} overflowWrap={OVERFLOW_WRAP.NORMAL}>
+    <Text {...args} overflowWrap={OVERFLOW_WRAP.NORMAL}>
       {OVERFLOW_WRAP.NORMAL}: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
-    </Typography>
-    <Typography {...args} overflowWrap={OVERFLOW_WRAP.BREAK_WORD}>
+    </Text>
+    <Text {...args} overflowWrap={OVERFLOW_WRAP.BREAK_WORD}>
       {OVERFLOW_WRAP.BREAK_WORD}: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
-    </Typography>
+    </Text>
   </div>
 );
 
@@ -259,34 +237,31 @@ export const Ellipsis = (args) => (
       display: 'block',
     }}
   >
-    <Typography {...args} ellipsis>
+    <Text {...args} ellipsis>
       Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
-    </Typography>
-    <Typography {...args} overflowWrap={OVERFLOW_WRAP.BREAK_WORD}>
+    </Text>
+    <Text {...args} overflowWrap={OVERFLOW_WRAP.BREAK_WORD}>
       No Ellipsis: 0x39013f961c378f02c2b82a6e1d31e9812786fd9d
-    </Typography>
+    </Text>
   </div>
 );
 
-export const Tag = (args) => (
+export const As = (args) => (
   <>
     {Object.values(ValidTags).map((tag) => (
-      <Typography
-        boxProps={{ backgroundColor: renderBackgroundColor(args.color) }}
-        {...args}
-        tag={tag}
-        key={tag}
-      >
-        {tag}
-      </Typography>
+      <div key={tag}>
+        <Text {...args} as={tag}>
+          {tag}
+        </Text>
+      </div>
     ))}
   </>
 );
 
 export const Margin = (args) => (
-  <Typography {...args}>
+  <Text {...args}>
     This Typography component has a margin of {args.margin * 4}px
-  </Typography>
+  </Text>
 );
 
 Margin.args = {
@@ -294,15 +269,13 @@ Margin.args = {
 };
 
 export const BoxProps = (args) => (
-  <Typography {...args}>This uses the boxProps prop</Typography>
+  <Text {...args}>This uses the boxProps prop</Text>
 );
 
 BoxProps.args = {
   color: COLORS.TEXT_DEFAULT,
-  boxProps: {
-    backgroundColor: COLORS.INFO_MUTED,
-    borderColor: COLORS.INFO_DEFAULT,
-    padding: 4,
-    borderRadius: 4,
-  },
+  backgroundColor: COLORS.PRIMARY_MUTED,
+  borderColor: COLORS.PRIMARY_DEFAULT,
+  padding: 1,
+  borderRadius: SIZES.SM,
 };

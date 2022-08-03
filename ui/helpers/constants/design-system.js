@@ -69,7 +69,7 @@ export const TYPOGRAPHY = {
   Paragraph: 'p',
 };
 
-export const TYPOGRAPHY_V2 = {
+export const TEXT = {
   DISPLAY_MD: 'display-md',
   HEADING_LG: 'heading-lg',
   HEADING_MD: 'heading-md',

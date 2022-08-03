@@ -50,7 +50,13 @@ $text-variants: (
 
   @each $weight in $font-weight {
     &--weight-#{$weight} {
-      font-weight: $weight;
+      @if $weight == "medium" {
+        font-weight: 500;
+      }
+
+      @else {
+        font-weight: $weight;
+      }
     }
   }
 

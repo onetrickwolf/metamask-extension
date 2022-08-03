@@ -6,7 +6,7 @@ import {
   FONT_WEIGHT,
   FONT_STYLE,
   TEXT_ALIGN,
-  TYPOGRAPHY_V2,
+  TEXT,
   OVERFLOW_WRAP,
 } from '../../../helpers/constants/design-system';
 import Box, { MultipleSizesAndAuto } from '../../ui/box';
@@ -45,10 +45,11 @@ export const ValidTags = [
   'span',
   'strong',
   'ul',
+  'label',
 ];
 
-export const Typography = ({
-  variant = TYPOGRAPHY_V2.BODY_MD,
+export const Text = ({
+  variant = TEXT.BODY_MD,
   color = COLORS.TEXT_DEFAULT,
   fontWeight,
   fontStyle,
@@ -56,17 +57,17 @@ export const Typography = ({
   overflowWrap,
   ellipsis,
   title,
-  tag,
+  as,
   margin,
-  marginTop = 1,
+  marginTop,
   marginRight,
-  marginBottom = 1,
+  marginBottom,
   marginLeft,
-  boxProps = {},
   className,
   children,
+  ...props
 }) => {
-  let Tag = tag ?? variant;
+  let Tag = as ?? variant;
   let strongTagFontWeight;
 
   if (Tag === 'strong') {
@@ -77,8 +78,10 @@ export const Typography = ({
     'text',
     className,
     `text--${variant}`,
-    `text--weight-${strongTagFontWeight || fontWeight}`,
-    `text--style-${fontStyle}`,
+
+    (strongTagFontWeight || fontWeight) &&
+      `text--weight-${strongTagFontWeight || fontWeight}`,
+    fontStyle && `text--style-${fontStyle}`,
     { [`text--ellipsis`]: Boolean(ellipsis) },
     {
       [`text--align-${align}`]: Boolean(align),
@@ -87,19 +90,14 @@ export const Typography = ({
     },
   );
 
-  // Set a default tag based on variant
-  switch (Tag.split('-')[0]) {
-    case 'body':
-      Tag = 'p';
-      break;
-    case 'heading':
-      Tag = 'h2';
-      break;
-    case 'display':
-      Tag = 'h1';
-      break;
-    default:
-      Tag = 'div';
+  // // Set a default tag based on variant
+  const splitTag = Tag.split('-')[0];
+  if (splitTag === 'body') {
+    Tag = 'p';
+  } else if (splitTag === 'heading') {
+    Tag = 'h2';
+  } else if (splitTag === 'display') {
+    Tag = 'h1';
   }
 
   return (
@@ -110,7 +108,7 @@ export const Typography = ({
         marginRight,
         marginBottom,
         marginLeft,
-        ...boxProps,
+        ...props,
       }}
     >
       {(boxClassName) => (
@@ -125,46 +123,47 @@ export const Typography = ({
   );
 };
 
-Typography.propTypes = {
+Text.propTypes = {
   /**
-   * The variation of font types of the Typography component (display, heading, body)
+   * The variation of font types of the Text component (display, heading, body)
    */
-  variant: PropTypes.oneOf(Object.values(TYPOGRAPHY_V2)),
+  variant: PropTypes.oneOf(Object.values(TEXT)),
   /**
-   * The color of the Typography component Should use the COLOR object from
+   * The color of the Text component Should use the COLOR object from
    * ./ui/helpers/constants/design-system.js
    */
   color: PropTypes.oneOf(ValidColors),
   /**
-   * The font-weight of the Typography component. Should use the FONT_WEIGHT object from
+   * The font-weight of the Text component. Should use the FONT_WEIGHT object from
    * ./ui/helpers/constants/design-system.js
    */
   fontWeight: PropTypes.oneOf(Object.values(FONT_WEIGHT)),
   /**
-   * The font-style of the Typography component. Should use the FONT_STYLE object from
+   * The font-style of the Text component. Should use the FONT_STYLE object from
    * ./ui/helpers/constants/design-system.js
    */
   fontStyle: PropTypes.oneOf(Object.values(FONT_STYLE)),
   /**
-   * The text-align of the Typography component. Should use the TEXT_ALIGN object from
+   * The text-align of the Text component. Should use the TEXT_ALIGN object from
    * ./ui/helpers/constants/design-system.js
    */
   align: PropTypes.oneOf(Object.values(TEXT_ALIGN)),
   /**
-   * The overflow-wrap of the Typography component. Should use the OVERFLOW_WRAP object from
+   * The overflow-wrap of the Text component. Should use the OVERFLOW_WRAP object from
    * ./ui/helpers/constants/design-system.js
    */
   overflowWrap: PropTypes.oneOf(Object.values(OVERFLOW_WRAP)),
   /**
-   * Used for long strings that can be cut off (...)
+   * Used for long strings that can be cut off...
    */
   ellipsis: PropTypes.bool,
   /**
-   * Changes the root html element tag of the Typography component.
+   * Changes the root html element tag of the Text component.
    */
-  tag: PropTypes.oneOf(ValidTags),
+  as: PropTypes.oneOf(ValidTags),
   /**
-   * Adds margin to the Typography component should use valid size
+   * Adds margin to the Text component should use valid size
+   * you can also use any box props (padding, backgroundColor, etc)
    */
   margin: MultipleSizesAndAuto,
   marginTop: MultipleSizesAndAuto,
@@ -172,14 +171,7 @@ Typography.propTypes = {
   marginRight: MultipleSizesAndAuto,
   marginLeft: MultipleSizesAndAuto,
   /**
-   * Used to pass any valid Box component props such as margin or padding
-   * to the Typography component
-   */
-  boxProps: PropTypes.shape({
-    ...Box.propTypes,
-  }),
-  /**
-   * Additional className to assign the Typography component
+   * Additional className to assign the Text component
    */
   className: PropTypes.string,
   /**
@@ -187,9 +179,9 @@ Typography.propTypes = {
    */
   title: PropTypes.string,
   /**
-   * The text content of the Typography component
+   * The text content of the Text component
    */
   children: PropTypes.node.isRequired,
 };
 
-export default Typography;
+export default Text;

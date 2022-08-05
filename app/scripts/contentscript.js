@@ -69,7 +69,7 @@ function injectScript(content) {
 }
 
 /**
- * @TODO need to reset streams here
+ * @todo need to reset streams here
  */
 function setupPhishingStream() {
   // the transport-specific streams for communication between inpage and background

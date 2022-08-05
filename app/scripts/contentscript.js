@@ -149,10 +149,10 @@ function setupStreams() {
       notifyInpageOfStreamFailure();
     });
 
-    /* forward communication across inpage-background for these channels only */
+    /** forward communication across inpage-background for these channels only */
     forwardTrafficBetweenMuxes(PROVIDER, pageMux, extensionMux);
 
-    /* connect "phishing" channel to warning system */
+    /** connect "phishing" channel to warning system */
     const phishingStream = extensionMux.createStream('phishing');
     phishingStream.once('data', redirectToPhishingWarning);
   };

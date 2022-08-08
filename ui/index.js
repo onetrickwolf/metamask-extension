@@ -10,7 +10,7 @@ import { ALERT_TYPES } from '../shared/constants/alerts';
 import { maskObject } from '../shared/modules/object.utils';
 import { SENTRY_STATE } from '../app/scripts/lib/setupSentry';
 import { ENVIRONMENT_TYPE_POPUP } from '../shared/constants/app';
-import switchDirection from '../app/scripts/constants/switch-direction';
+import switchDirection from '../shared/lib/switch-direction';
 import { setupLocale } from '../app/scripts/constants/error-utils';
 import * as actions from './store/actions';
 import configureStore from './store/store';

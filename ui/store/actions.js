@@ -4,7 +4,7 @@ import { captureException } from '@sentry/browser';
 import { capitalize, isEqual } from 'lodash';
 import getBuyUrl from '../../app/scripts/lib/buy-url';
 import { getMethodDataAsync } from '../helpers/utils/transactions.util';
-import switchDirection from '../../app/scripts/constants/switch-direction';
+import switchDirection from '../../shared/lib/switch-direction';
 import {
   ENVIRONMENT_TYPE_NOTIFICATION,
   ORIGIN_METAMASK,

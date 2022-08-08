@@ -2,7 +2,7 @@ import log from 'loglevel';
 import { memoize } from 'lodash';
 import getFirstPreferredLangCode from '../lib/get-first-preferred-lang-code';
 import getFetchWithTimeout from '../../../shared/modules/fetch-with-timeout';
-import switchDirection from './switch-direction';
+import switchDirection from '../../../shared/lib/switch-direction';
 
 const fetchWithTimeout = getFetchWithTimeout();
 

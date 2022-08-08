@@ -25,7 +25,7 @@ import {
   getMinimumGasTotalInHexWei,
 } from '../../shared/modules/gas.utils';
 import { isEqualCaseInsensitive } from '../../shared/modules/string-utils';
-import { calcTokenAmount } from '../../app/scripts/constants/transactions-controller-utils';
+import { calcTokenAmount } from '../../shared/lib/transactions-controller-utils';
 import { getAveragePriceEstimateInHexWEI } from './custom-gas';
 import { getCurrentChainId, deprecatedGetCurrentNetworkId } from './selectors';
 import { checkNetworkAndAccountSupports1559 } from '.';
@@ -263,9 +263,8 @@ export const transactionFeeSelector = function (state, txData) {
   const nativeCurrency = getNativeCurrency(state);
   const gasFeeEstimates = getGasFeeEstimates(state) || {};
   const gasEstimateType = getGasEstimateType(state);
-  const networkAndAccountSupportsEIP1559 = checkNetworkAndAccountSupports1559(
-    state,
-  );
+  const networkAndAccountSupportsEIP1559 =
+    checkNetworkAndAccountSupports1559(state);
 
   const gasEstimationObject = {
     gasLimit: txData.txParams?.gas ?? '0x0',
@@ -278,10 +277,8 @@ export const transactionFeeSelector = function (state, txData) {
       gasEstimationObject.gasPrice =
         txData.txParams?.gasPrice ?? decGWEIToHexWEI(gasPrice);
     } else {
-      const {
-        suggestedMaxPriorityFeePerGas,
-        suggestedMaxFeePerGas,
-      } = selectedGasEstimates;
+      const { suggestedMaxPriorityFeePerGas, suggestedMaxFeePerGas } =
+        selectedGasEstimates;
       gasEstimationObject.maxFeePerGas =
         txData.txParams?.maxFeePerGas &&
         (txData.userFeeLevel === CUSTOM_GAS_ESTIMATE || !suggestedMaxFeePerGas)
@@ -337,12 +334,10 @@ export const transactionFeeSelector = function (state, txData) {
     numberOfDecimals: 6,
   });
 
-  const hexMinimumTransactionFee = getMinimumGasTotalInHexWei(
-    gasEstimationObject,
-  );
-  const hexMaximumTransactionFee = getMaximumGasTotalInHexWei(
-    gasEstimationObject,
-  );
+  const hexMinimumTransactionFee =
+    getMinimumGasTotalInHexWei(gasEstimationObject);
+  const hexMaximumTransactionFee =
+    getMaximumGasTotalInHexWei(gasEstimationObject);
 
   const fiatMinimumTransactionFee = getTransactionFee({
     value: hexMinimumTransactionFee,

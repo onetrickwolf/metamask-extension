@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import BigNumber from 'bignumber.js';
 import classnames from 'classnames';
 import { formatSwapsValueForDisplay } from '../swaps.util';
-import { calcTokenAmount } from '../../../../app/scripts/constants/transactions-controller-utils';
+import { calcTokenAmount } from '../../../../shared/lib/transactions-controller-utils';
 
 export default function ExchangeRateDisplay({
   primaryTokenValue,

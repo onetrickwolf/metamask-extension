@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { getTokenValueParam } from '../../app/scripts/constants/metamask-controller-utils';
-import { calcTokenAmount } from '../../app/scripts/constants/transactions-controller-utils';
+import { calcTokenAmount } from '../../shared/lib/transactions-controller-utils';
 import { useTokenData } from './useTokenData';
 
 /**

@@ -8,7 +8,7 @@ import { isEqualCaseInsensitive } from '../../../shared/modules/string-utils';
 import { parseStandardTokenTransactionData } from '../../../shared/modules/transaction.utils';
 import { ERC20 } from '../../../shared/constants/transaction';
 import { getTokenValueParam } from '../../../app/scripts/constants/metamask-controller-utils';
-import { calcTokenAmount } from '../../../app/scripts/constants/transactions-controller-utils';
+import { calcTokenAmount } from '../../../shared/lib/transactions-controller-utils';
 import * as util from './util';
 import { formatCurrency } from './confirm-tx.util';
 

@@ -5,8 +5,7 @@ import {
   getMinimumGasTotalInHexWei,
 } from '../../../shared/modules/gas.utils';
 import { decGWEIToHexWEI } from '../../helpers/utils/conversions.util';
-
-import { decimalToHex } from '../../../app/scripts/constants/transactions-controller-utils';
+import { decimalToHex } from '../../../shared/lib/transactions-controller-utils';
 import {
   FEE_MARKET_ESTIMATE_RETURN_VALUE,
   LEGACY_GAS_ESTIMATE_RETURN_VALUE,
@@ -59,9 +58,8 @@ describe('useGasEstimates', () => {
       const gasLimit = '21000';
       const maxFeePerGas = '100';
       const maxPriorityFeePerGas = '10';
-      const {
-        estimatedBaseFee,
-      } = FEE_MARKET_ESTIMATE_RETURN_VALUE.gasFeeEstimates;
+      const { estimatedBaseFee } =
+        FEE_MARKET_ESTIMATE_RETURN_VALUE.gasFeeEstimates;
       const { result } = renderHook(() =>
         useGasEstimatesHook({ gasLimit, maxFeePerGas, maxPriorityFeePerGas }),
       );
@@ -117,9 +115,8 @@ describe('useGasEstimates', () => {
     });
 
     it('uses gasFeeEstimates.estimatedBaseFee prop to calculate estimatedBaseFee', () => {
-      const {
-        estimatedBaseFee,
-      } = FEE_MARKET_ESTIMATE_RETURN_VALUE.gasFeeEstimates;
+      const { estimatedBaseFee } =
+        FEE_MARKET_ESTIMATE_RETURN_VALUE.gasFeeEstimates;
       const { result } = renderHook(() => useGasEstimatesHook());
       expect(result.current.estimatedBaseFee).toBe(
         decGWEIToHexWEI(estimatedBaseFee),

@@ -16,7 +16,7 @@ import { useGasFeeContext } from '../../../../contexts/gasFee';
 import {
   decimalToHex,
   hexWEIToDecGWEI,
-} from '../../../../../app/scripts/constants/transactions-controller-utils';
+} from '../../../../../shared/lib/transactions-controller-utils';
 import { useCustomTimeEstimate } from './useCustomTimeEstimate';
 
 export const useGasItemFeeDetails = (priorityLevel) => {
@@ -29,9 +29,8 @@ export const useGasItemFeeDetails = (priorityLevel) => {
     maxPriorityFeePerGas: maxPriorityFeePerGasValue,
     transaction,
   } = useGasFeeContext();
-  const [estimateGreaterThanGasUse, setEstimateGreaterThanGasUse] = useState(
-    false,
-  );
+  const [estimateGreaterThanGasUse, setEstimateGreaterThanGasUse] =
+    useState(false);
   const advancedGasFeeValues = useSelector(getAdvancedGasFeeValues);
 
   let maxFeePerGas;

@@ -60,7 +60,7 @@ import { MIN_GAS_LIMIT_DEC } from '../send/send.constants';
 import { NETWORK_TO_NAME_MAP } from '../../../shared/constants/network';
 
 import { hexToDecimal } from '../../../app/scripts/constants/metamask-controller-utils';
-import { hexWEIToDecGWEI } from '../../../app/scripts/constants/transactions-controller-utils';
+import { hexWEIToDecGWEI } from '../../../shared/lib/transactions-controller-utils';
 import TransactionAlerts from './transaction-alerts';
 
 const renderHeartBeatIfNotInTest = () =>

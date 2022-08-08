@@ -1,6 +1,6 @@
 import { BN } from 'ethereumjs-util';
-import { toPrecisionWithoutTrailingZeros } from '../../../app/scripts/constants/transactions-controller-utils';
 import { addHexPrefixToObjectValues } from '../../../app/scripts/constants/swaps-utils';
+import { toPrecisionWithoutTrailingZeros } from '../../../shared/lib/transactions-controller-utils';
 import * as util from './util';
 
 describe('util', () => {

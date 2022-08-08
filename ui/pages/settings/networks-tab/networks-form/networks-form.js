@@ -39,7 +39,7 @@ import {
   infuraProjectId,
   FEATURED_RPCS,
 } from '../../../../../shared/constants/network';
-import { decimalToHex } from '../../../../../app/scripts/constants/transactions-controller-utils';
+import { decimalToHex } from '../../../../../shared/lib/transactions-controller-utils';
 
 /**
  * Attempts to convert the given chainId to a decimal string, for display

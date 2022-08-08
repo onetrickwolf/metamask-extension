@@ -1,5 +1,5 @@
+import { SUPPORT_LINK } from '../../../shared/lib/ui-utils';
 import { fetchLocale, getErrorHtml } from './error-utils';
-import { SUPPORT_LINK } from './ui-utils';
 
 jest.mock('./error-utils', () => {
   const originalModule = jest.requireActual('./error-utils');

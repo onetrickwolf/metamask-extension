@@ -18,7 +18,7 @@ import {
   isEIP1559Network,
 } from '../ducks/metamask/metamask';
 import { GAS_ESTIMATE_TYPES } from '../helpers/constants/common';
-import { calcGasTotal } from '../../app/scripts/constants/transactions-controller-utils';
+import { calcGasTotal } from '../../shared/lib/transactions-controller-utils';
 import { getCurrentCurrency, getIsMainnet, getShouldShowFiat } from '.';
 
 const NUMBER_OF_DECIMALS_SM_BTNS = 5;
@@ -301,17 +301,14 @@ export function getRenderableBasicEstimateData(state, gasLimit) {
   const { conversionRate } = state.metamask;
   const currentCurrency = getCurrentCurrency(state);
 
-  const {
-    slowEstimateData,
-    averageEstimateData,
-    fastEstimateData,
-  } = getRenderableGasButtonData(
-    getGasFeeEstimates(state),
-    gasLimit,
-    showFiat,
-    conversionRate,
-    currentCurrency,
-  );
+  const { slowEstimateData, averageEstimateData, fastEstimateData } =
+    getRenderableGasButtonData(
+      getGasFeeEstimates(state),
+      gasLimit,
+      showFiat,
+      conversionRate,
+      currentCurrency,
+    );
 
   return [slowEstimateData, averageEstimateData, fastEstimateData];
 }

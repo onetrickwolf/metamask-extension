@@ -105,7 +105,7 @@ import {
 import SwapsFooter from '../swaps-footer';
 import { isEqualCaseInsensitive } from '../../../../shared/modules/string-utils';
 import { hexToDecimal } from '../../../../app/scripts/constants/metamask-controller-utils';
-import { calcTokenAmount } from '../../../../app/scripts/constants/transactions-controller-utils';
+import { calcTokenAmount } from '../../../../shared/lib/transactions-controller-utils';
 import { shouldEnableDirectWrapping } from '../../../../app/scripts/constants/swaps-utils';
 
 const fuseSearchKeys = [
@@ -128,9 +128,8 @@ export default function BuildQuote({
   const history = useHistory();
   const trackEvent = useContext(MetaMetricsContext);
 
-  const [fetchedTokenExchangeRate, setFetchedTokenExchangeRate] = useState(
-    undefined,
-  );
+  const [fetchedTokenExchangeRate, setFetchedTokenExchangeRate] =
+    useState(undefined);
   const [verificationClicked, setVerificationClicked] = useState(false);
 
   const isFeatureFlagLoaded = useSelector(getIsFeatureFlagLoaded);

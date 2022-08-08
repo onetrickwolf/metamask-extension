@@ -35,7 +35,7 @@ import EditGasPopover from '../../components/app/edit-gas-popover/edit-gas-popov
 import Loading from '../../components/ui/loading-screen';
 import { parseStandardTokenTransactionData } from '../../../shared/modules/transaction.utils';
 import { ERC1155, ERC20, ERC721 } from '../../../shared/constants/transaction';
-import { calcTokenAmount } from '../../../app/scripts/constants/transactions-controller-utils';
+import { calcTokenAmount } from '../../../shared/lib/transactions-controller-utils';
 import { getCustomTxParamsData } from './confirm-approve.util';
 import ConfirmApproveContent from './confirm-approve-content';
 
@@ -153,9 +153,8 @@ export default function ConfirmApprove({
       })
     : null;
 
-  const parsedTransactionData = parseStandardTokenTransactionData(
-    transactionData,
-  );
+  const parsedTransactionData =
+    parseStandardTokenTransactionData(transactionData);
   const setApproveForAllArg = getTokenApprovedParam(parsedTransactionData);
 
   return tokenSymbol === undefined && assetName === undefined ? (

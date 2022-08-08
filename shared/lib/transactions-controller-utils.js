@@ -1,11 +1,11 @@
 import BigNumber from 'bignumber.js';
-import { TRANSACTION_ENVELOPE_TYPES } from '../../../shared/constants/transaction';
+import { TRANSACTION_ENVELOPE_TYPES } from '../constants/transaction';
 import {
   conversionUtil,
   multiplyCurrencies,
   subtractCurrencies,
-} from '../../../shared/modules/conversion.utils';
-import { isSwapsDefaultTokenSymbol } from '../../../shared/modules/swaps.utils';
+} from '../modules/conversion.utils';
+import { isSwapsDefaultTokenSymbol } from '../modules/swaps.utils';
 
 const TOKEN_TRANSFER_LOG_TOPIC_HASH =
   '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef';

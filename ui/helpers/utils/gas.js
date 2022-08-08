@@ -6,7 +6,7 @@ import {
   EDIT_GAS_MODES,
 } from '../../../shared/constants/gas';
 import { multiplyCurrencies } from '../../../shared/modules/conversion.utils';
-import { hexWEIToDecGWEI } from '../../../app/scripts/constants/transactions-controller-utils';
+import { hexWEIToDecGWEI } from '../../../shared/lib/transactions-controller-utils';
 import {
   bnGreaterThan,
   isNullish,

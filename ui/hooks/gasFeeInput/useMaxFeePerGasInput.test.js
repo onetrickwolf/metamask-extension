@@ -7,7 +7,7 @@ import {
   CUSTOM_GAS_ESTIMATE,
 } from '../../../shared/constants/gas';
 
-import { decimalToHex } from '../../../app/scripts/constants/transactions-controller-utils';
+import { decimalToHex } from '../../../shared/lib/transactions-controller-utils';
 import {
   FEE_MARKET_ESTIMATE_RETURN_VALUE,
   LEGACY_GAS_ESTIMATE_RETURN_VALUE,

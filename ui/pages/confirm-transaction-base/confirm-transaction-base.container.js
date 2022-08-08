@@ -57,7 +57,7 @@ import { CUSTOM_GAS_ESTIMATE } from '../../../shared/constants/gas';
 import { TRANSACTION_TYPES } from '../../../shared/constants/transaction';
 import { isEqualCaseInsensitive } from '../../../shared/modules/string-utils';
 import { getTokenAddressParam } from '../../helpers/utils/token-util';
-import { calcGasTotal } from '../../../app/scripts/constants/transactions-controller-utils';
+import { calcGasTotal } from '../../../shared/lib/transactions-controller-utils';
 import ConfirmTransactionBase from './confirm-transaction-base.component';
 
 let customNonceValue = '';
@@ -203,10 +203,8 @@ const mapStateToProps = (state, ownProps) => {
   const fromAddressIsLedger = isAddressLedger(state, fromAddress);
   const nativeCurrency = getNativeCurrency(state);
 
-  const hardwareWalletRequiresConnection = doesAddressRequireLedgerHidConnection(
-    state,
-    fromAddress,
-  );
+  const hardwareWalletRequiresConnection =
+    doesAddressRequireLedgerHidConnection(state, fromAddress);
 
   const isMultiLayerFeeNetwork = getIsMultiLayerFeeNetwork(state);
   const eip1559V2Enabled = getEIP1559V2Enabled(state);

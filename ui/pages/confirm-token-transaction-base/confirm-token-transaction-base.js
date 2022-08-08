@@ -22,7 +22,7 @@ import {
   getNativeCurrency,
 } from '../../ducks/metamask/metamask';
 import { ERC1155, ERC20, ERC721 } from '../../../shared/constants/transaction';
-import { hexWEIToDecETH } from '../../../app/scripts/constants/transactions-controller-utils';
+import { hexWEIToDecETH } from '../../../shared/lib/transactions-controller-utils';
 
 export default function ConfirmTokenTransactionBase({
   image = '',

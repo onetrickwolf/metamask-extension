@@ -87,7 +87,7 @@ import { EVENT } from '../../../shared/constants/metametrics';
 import { TRANSACTION_STATUSES } from '../../../shared/constants/transaction';
 import ActionableMessage from '../../components/ui/actionable-message';
 import { MetaMetricsContext } from '../../contexts/metametrics';
-import { getSwapsTokensReceivedFromTxMeta } from '../../../app/scripts/constants/transactions-controller-utils';
+import { getSwapsTokensReceivedFromTxMeta } from '../../../shared/lib/transactions-controller-utils';
 import {
   fetchTokens,
   fetchTopAssets,
@@ -173,10 +173,8 @@ export default function Swap() {
   // This will pre-load gas fees before going to the View Quote page.
   useGasFeeEstimates();
 
-  const {
-    balance: ethBalance,
-    address: selectedAccountAddress,
-  } = selectedAccount;
+  const { balance: ethBalance, address: selectedAccountAddress } =
+    selectedAccount;
 
   const { destinationTokenAddedForSwap } = fetchParams || {};
 

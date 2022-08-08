@@ -19,7 +19,7 @@ import { isLegacyTransaction } from '../../helpers/utils/transactions.util';
 
 import { useCurrencyDisplay } from '../useCurrencyDisplay';
 import { useUserPreferencedCurrency } from '../useUserPreferencedCurrency';
-import { decimalToHex } from '../../../app/scripts/constants/transactions-controller-utils';
+import { decimalToHex } from '../../../shared/lib/transactions-controller-utils';
 
 /**
  * @typedef {object} GasEstimatesReturnType
@@ -64,10 +64,8 @@ export function useGasEstimates({
     useSelector(checkNetworkAndAccountSupports1559) &&
     !isLegacyTransaction(transaction?.txParams);
 
-  const {
-    currency: fiatCurrency,
-    numberOfDecimals: fiatNumberOfDecimals,
-  } = useUserPreferencedCurrency(SECONDARY);
+  const { currency: fiatCurrency, numberOfDecimals: fiatNumberOfDecimals } =
+    useUserPreferencedCurrency(SECONDARY);
 
   const showFiat = useSelector(getShouldShowFiat);
 

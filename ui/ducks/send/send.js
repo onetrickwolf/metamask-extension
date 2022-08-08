@@ -108,7 +108,7 @@ import { getTokenValueParam } from '../../../app/scripts/constants/metamask-cont
 import {
   calcGasTotal,
   calcTokenAmount,
-} from '../../../app/scripts/constants/transactions-controller-utils';
+} from '../../../shared/lib/transactions-controller-utils';
 import {
   estimateGasLimitForSend,
   generateTransactionParams,
@@ -1367,7 +1367,8 @@ const slice = createSlice({
                 checkExistingAddresses(state.recipientInput, tokens))) ||
             isProbablyAnAssetContract
           ) {
-            draftTransaction.recipient.warning = KNOWN_RECIPIENT_ADDRESS_WARNING;
+            draftTransaction.recipient.warning =
+              KNOWN_RECIPIENT_ADDRESS_WARNING;
           } else {
             draftTransaction.recipient.warning = null;
           }
@@ -1595,7 +1596,8 @@ const slice = createSlice({
                 });
               }
             } else {
-              draftTransaction.recipient.error = INVALID_RECIPIENT_ADDRESS_ERROR;
+              draftTransaction.recipient.error =
+                INVALID_RECIPIENT_ADDRESS_ERROR;
             }
           }
         }

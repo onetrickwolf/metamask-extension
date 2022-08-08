@@ -27,7 +27,7 @@ import {
 } from '../../../../shared/constants/gas';
 import { METAMASK_CONTROLLER_EVENTS } from '../../metamask-controller';
 import { ORIGIN_METAMASK } from '../../../../shared/constants/app';
-import { TRANSACTION_ENVELOPE_TYPE_NAMES } from '../../constants/transactions-controller-utils';
+import { TRANSACTION_ENVELOPE_TYPE_NAMES } from '../../../../shared/lib/transactions-controller-utils';
 import TransactionController from '.';
 
 const noop = () => true;
@@ -2291,8 +2291,7 @@ describe('Transaction Controller', function () {
       providerResultStub.eth_getCode = '0xab';
       // test update gasFees
       await txController.updateEditableParams('1', {
-        data:
-          '0xa9059cbb000000000000000000000000e18035bf8712672935fdb4e5e431b1a0183d2dfc0000000000000000000000000000000000000000000000000de0b6b3a7640000',
+        data: '0xa9059cbb000000000000000000000000e18035bf8712672935fdb4e5e431b1a0183d2dfc0000000000000000000000000000000000000000000000000de0b6b3a7640000',
       });
       const result = txStateManager.getTransaction('1');
       assert.equal(
@@ -2316,8 +2315,7 @@ describe('Transaction Controller', function () {
           // maxFeePerGas: '0x004',
           to: VALID_ADDRESS,
           from: VALID_ADDRESS,
-          data:
-            '0xa9059cbb000000000000000000000000e18035bf8712672935fdb4e5e431b1a0183d2dfc0000000000000000000000000000000000000000000000000de0b6b3a7640000',
+          data: '0xa9059cbb000000000000000000000000e18035bf8712672935fdb4e5e431b1a0183d2dfc0000000000000000000000000000000000000000000000000de0b6b3a7640000',
         },
         estimateUsed: '0x005',
         estimatedBaseFee: '0x006',

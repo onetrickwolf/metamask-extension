@@ -17,8 +17,8 @@ import {
 import { SECOND } from '../../../shared/constants/time';
 import { isValidHexAddress } from '../../../shared/modules/hexstring-utils';
 import { addHexPrefix } from '../lib/util';
+import { decimalToHex } from '../../../shared/lib/transactions-controller-utils';
 import fetchWithCache from './fetch-with-cache';
-import { decimalToHex } from './transactions-controller-utils';
 
 const TEST_CHAIN_IDS = [RINKEBY_CHAIN_ID, LOCALHOST_CHAIN_ID];
 

@@ -34,7 +34,7 @@ import { checkNetworkAndAccountSupports1559 } from '../../../selectors';
 import { useIncrementedGasFees } from '../../../hooks/useIncrementedGasFees';
 import { isLegacyTransaction } from '../../../helpers/utils/transactions.util';
 import { hexToDecimal } from '../../../../app/scripts/constants/metamask-controller-utils';
-import { decimalToHex } from '../../../../app/scripts/constants/transactions-controller-utils';
+import { decimalToHex } from '../../../../shared/lib/transactions-controller-utils';
 
 export default function EditGasPopover({
   popoverTitle = '',
@@ -61,10 +61,8 @@ export default function EditGasPopover({
     supportsEIP1559;
   const [showEducationContent, setShowEducationContent] = useState(false);
 
-  const [
-    dappSuggestedGasFeeAcknowledged,
-    setDappSuggestedGasFeeAcknowledged,
-  ] = useState(false);
+  const [dappSuggestedGasFeeAcknowledged, setDappSuggestedGasFeeAcknowledged] =
+    useState(false);
 
   const minimumGasLimitDec = hexToDecimal(minimumGasLimit);
   const updatedCustomGasSettings = useIncrementedGasFees(transaction);

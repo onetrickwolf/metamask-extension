@@ -58,7 +58,7 @@ import { updateGasFees } from '../../../../ducks/metamask/metamask';
 import {
   calcGasTotal,
   hexWEIToDecGWEI,
-} from '../../../../../app/scripts/constants/transactions-controller-utils';
+} from '../../../../../shared/lib/transactions-controller-utils';
 import GasModalPageContainer from './gas-modal-page-container.component';
 
 const mapStateToProps = (state, ownProps) => {
@@ -138,9 +138,8 @@ const mapStateToProps = (state, ownProps) => {
         conversionRate,
       });
   const isGasEstimate = getIsGasEstimatesFetched(state);
-  const customNetworkEstimateWasFetched = getIsCustomNetworkGasPriceFetched(
-    state,
-  );
+  const customNetworkEstimateWasFetched =
+    getIsCustomNetworkGasPriceFetched(state);
 
   let customPriceIsSafe = true;
   if ((isMainnet || process.env.IN_TEST) && isGasEstimate) {

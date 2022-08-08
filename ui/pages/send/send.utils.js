@@ -10,7 +10,7 @@ import {
 
 import { addHexPrefix } from '../../../app/scripts/lib/util';
 import { ERC20, ERC721 } from '../../../shared/constants/transaction';
-import { calcTokenAmount } from '../../../app/scripts/constants/transactions-controller-utils';
+import { calcTokenAmount } from '../../../shared/lib/transactions-controller-utils';
 import {
   TOKEN_TRANSFER_FUNCTION_SIGNATURE,
   COLLECTIBLE_TRANSFER_FROM_FUNCTION_SIGNATURE,

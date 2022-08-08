@@ -13,8 +13,7 @@ import { GasFeeContextProvider } from '../../../contexts/gasFee';
 import configureStore from '../../../store/store';
 import { decGWEIToHexWEI } from '../../../helpers/utils/conversions.util';
 import InfoTooltip from '../../ui/info-tooltip';
-
-import { hexWEIToDecETH } from '../../../../app/scripts/constants/transactions-controller-utils';
+import { hexWEIToDecETH } from '../../../../shared/lib/transactions-controller-utils';
 import CancelSpeedupPopover from './cancel-speedup-popover';
 
 const MAXFEEPERGAS_ABOVE_MOCK_MEDIUM_HEX = '0x174876e800';
@@ -22,10 +21,8 @@ const MAXGASCOST_ABOVE_MOCK_MEDIUM_BN = new BigNumber(
   MAXFEEPERGAS_ABOVE_MOCK_MEDIUM_HEX,
   16,
 ).times(21000, 10);
-const MAXGASCOST_ABOVE_MOCK_MEDIUM_BN_PLUS_TEN_PCT_HEX = MAXGASCOST_ABOVE_MOCK_MEDIUM_BN.times(
-  1.1,
-  10,
-).toString(16);
+const MAXGASCOST_ABOVE_MOCK_MEDIUM_BN_PLUS_TEN_PCT_HEX =
+  MAXGASCOST_ABOVE_MOCK_MEDIUM_BN.times(1.1, 10).toString(16);
 
 const EXPECTED_ETH_FEE_1 = hexWEIToDecETH(
   MAXGASCOST_ABOVE_MOCK_MEDIUM_BN_PLUS_TEN_PCT_HEX,
@@ -38,18 +35,15 @@ const MOCK_SUGGESTED_MEDIUM_MAXFEEPERGAS_BN_WEI = new BigNumber(
   decGWEIToHexWEI(MOCK_SUGGESTED_MEDIUM_MAXFEEPERGAS_DEC_GWEI),
   16,
 );
-const MAXFEEPERGAS_BELOW_MOCK_MEDIUM_HEX = MOCK_SUGGESTED_MEDIUM_MAXFEEPERGAS_BN_WEI.div(
-  10,
-  10,
-).toString(16);
+const MAXFEEPERGAS_BELOW_MOCK_MEDIUM_HEX =
+  MOCK_SUGGESTED_MEDIUM_MAXFEEPERGAS_BN_WEI.div(10, 10).toString(16);
 
 const EXPECTED_ETH_FEE_2 = hexWEIToDecETH(
   MOCK_SUGGESTED_MEDIUM_MAXFEEPERGAS_BN_WEI.times(21000, 10).toString(16),
 );
 
-const MOCK_SUGGESTED_MEDIUM_MAXFEEPERGAS_HEX_WEI = MOCK_SUGGESTED_MEDIUM_MAXFEEPERGAS_BN_WEI.toString(
-  16,
-);
+const MOCK_SUGGESTED_MEDIUM_MAXFEEPERGAS_HEX_WEI =
+  MOCK_SUGGESTED_MEDIUM_MAXFEEPERGAS_BN_WEI.toString(16);
 
 jest.mock('../../../store/actions', () => ({
   disconnectGasFeeEstimatePoller: jest.fn(),

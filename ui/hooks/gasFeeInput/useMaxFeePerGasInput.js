@@ -16,7 +16,7 @@ import { useUserPreferencedCurrency } from '../useUserPreferencedCurrency';
 import {
   decimalToHex,
   hexWEIToDecGWEI,
-} from '../../../app/scripts/constants/transactions-controller-utils';
+} from '../../../shared/lib/transactions-controller-utils';
 import { feeParamsAreCustom, getGasFeeEstimate } from './utils';
 
 const getMaxFeePerGasFromTransaction = (transaction, gasFeeEstimates) => {
@@ -59,10 +59,8 @@ export function useMaxFeePerGasInput({
     useSelector(checkNetworkAndAccountSupports1559) &&
     !isLegacyTransaction(transaction?.txParams);
 
-  const {
-    currency: fiatCurrency,
-    numberOfDecimals: fiatNumberOfDecimals,
-  } = useUserPreferencedCurrency(SECONDARY);
+  const { currency: fiatCurrency, numberOfDecimals: fiatNumberOfDecimals } =
+    useUserPreferencedCurrency(SECONDARY);
 
   const showFiat = useSelector(getShouldShowFiat);
 

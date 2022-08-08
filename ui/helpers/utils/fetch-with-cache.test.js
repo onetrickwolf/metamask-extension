@@ -11,8 +11,8 @@ jest.mock('../../../app/scripts/constants/storage-helpers', () => ({
   setStorageItem: jest.fn(),
 }));
 
-const fetchWithCache = require('../../../app/scripts/constants/fetch-with-cache')
-  .default;
+const fetchWithCache =
+  require('../../../app/scripts/constants/fetch-with-cache').default;
 
 describe('Fetch with cache', () => {
   afterEach(() => {

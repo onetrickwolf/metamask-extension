@@ -1,5 +1,5 @@
 import { rawEncode } from 'ethereumjs-abi';
-import { calcGasTotal } from '../../../app/scripts/constants/transactions-controller-utils';
+import { calcGasTotal } from '../../../shared/lib/transactions-controller-utils';
 
 import {
   multiplyCurrencies,

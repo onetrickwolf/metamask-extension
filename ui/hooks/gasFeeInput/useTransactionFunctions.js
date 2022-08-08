@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { decimalToHex } from '../../../app/scripts/constants/transactions-controller-utils';
+import { decimalToHex } from '../../../shared/lib/transactions-controller-utils';
 
 import { EDIT_GAS_MODES, PRIORITY_LEVELS } from '../../../shared/constants/gas';
 import { decGWEIToHexWEI } from '../../helpers/utils/conversions.util';
@@ -133,8 +133,11 @@ export const useTransactionFunctions = ({
 
   const updateTransactionToTenPercentIncreasedGasFee = useCallback(
     (initTransaction = false) => {
-      const { gas: gasLimit, maxFeePerGas, maxPriorityFeePerGas } =
-        transaction.previousGas || transaction.txParams;
+      const {
+        gas: gasLimit,
+        maxFeePerGas,
+        maxPriorityFeePerGas,
+      } = transaction.previousGas || transaction.txParams;
 
       updateTransaction({
         estimateSuggested: initTransaction
@@ -154,10 +157,8 @@ export const useTransactionFunctions = ({
       if (!gasFeeEstimates[gasFeeEstimateToUse]) {
         return;
       }
-      const {
-        suggestedMaxFeePerGas,
-        suggestedMaxPriorityFeePerGas,
-      } = gasFeeEstimates[gasFeeEstimateToUse];
+      const { suggestedMaxFeePerGas, suggestedMaxPriorityFeePerGas } =
+        gasFeeEstimates[gasFeeEstimateToUse];
       updateTransaction({
         estimateUsed: gasFeeEstimateToUse,
         maxFeePerGas: decGWEIToHexWEI(suggestedMaxFeePerGas),

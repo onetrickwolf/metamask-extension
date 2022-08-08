@@ -7,7 +7,7 @@ import TextField from '../../components/ui/text-field';
 import Mascot from '../../components/ui/mascot';
 import { DEFAULT_ROUTE } from '../../helpers/constants/routes';
 import { EVENT } from '../../../shared/constants/metametrics';
-import { SUPPORT_LINK } from '../../../app/scripts/constants/ui-utils';
+import { SUPPORT_LINK } from '../../../shared/lib/ui-utils';
 
 export default class UnlockPage extends Component {
   static contextTypes = {

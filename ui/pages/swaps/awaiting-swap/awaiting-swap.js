@@ -54,7 +54,7 @@ import SwapsFooter from '../swaps-footer';
 
 import CreateNewSwap from '../create-new-swap';
 import ViewOnBlockExplorer from '../view-on-block-explorer';
-import { SUPPORT_LINK } from '../../../../app/scripts/constants/ui-utils';
+import { SUPPORT_LINK } from '../../../../shared/lib/ui-utils';
 import SwapFailureIcon from './swap-failure-icon';
 import SwapSuccessIcon from './swap-success-icon';
 import QuotesTimeoutIcon from './quotes-timeout-icon';
@@ -83,9 +83,8 @@ export default function AwaitingSwap({
   const usdConversionRate = useSelector(getUSDConversionRate);
   const chainId = useSelector(getCurrentChainId);
   const rpcPrefs = useSelector(getRpcPrefsForCurrentProvider, shallowEqual);
-  const [trackedQuotesExpiredEvent, setTrackedQuotesExpiredEvent] = useState(
-    false,
-  );
+  const [trackedQuotesExpiredEvent, setTrackedQuotesExpiredEvent] =
+    useState(false);
 
   let feeinUnformattedFiat;
 

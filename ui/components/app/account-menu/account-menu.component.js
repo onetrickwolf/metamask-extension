@@ -36,7 +36,7 @@ import IconImport from '../../ui/icon/icon-import';
 
 import Button from '../../ui/button';
 import SearchIcon from '../../ui/icon/search-icon';
-import { SUPPORT_LINK } from '../../../../app/scripts/constants/ui-utils';
+import { SUPPORT_LINK } from '../../../../shared/lib/ui-utils';
 import KeyRingLabel from './keyring-label';
 
 export function AccountMenuItem(props) {

@@ -7,7 +7,7 @@ import {
   getNumberOfSettingsInSection,
   handleSettingsRefs,
 } from '../../../helpers/utils/settings-search';
-import { SUPPORT_LINK } from '../../../../app/scripts/constants/ui-utils';
+import { SUPPORT_LINK } from '../../../../shared/lib/ui-utils';
 
 export default class InfoTab extends PureComponent {
   state = {

@@ -28,7 +28,7 @@ import { isSwapsDefaultTokenAddress } from '../../../shared/modules/swaps.utils'
 import {
   fetchTradesInfo as defaultFetchTradesInfo,
   getBaseApi,
-} from '../constants/swaps-utils';
+} from '../../../shared/lib/swaps-utils';
 import fetchWithCache from '../constants/fetch-with-cache';
 import { MINUTE, SECOND } from '../../../shared/constants/time';
 import { isEqualCaseInsensitive } from '../../../shared/modules/string-utils';

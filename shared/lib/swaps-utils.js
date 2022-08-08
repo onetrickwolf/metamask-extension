@@ -4,7 +4,7 @@ import {
   LOCALHOST_CHAIN_ID,
   MAINNET_CHAIN_ID,
   RINKEBY_CHAIN_ID,
-} from '../../../shared/constants/network';
+} from '../constants/network';
 import {
   GAS_API_BASE_URL,
   GAS_DEV_API_BASE_URL,
@@ -13,12 +13,12 @@ import {
   SWAPS_CLIENT_ID,
   SWAPS_DEV_API_V2_BASE_URL,
   SWAPS_WRAPPED_TOKENS_ADDRESSES,
-} from '../../../shared/constants/swaps';
-import { SECOND } from '../../../shared/constants/time';
-import { isValidHexAddress } from '../../../shared/modules/hexstring-utils';
-import { addHexPrefix } from '../lib/util';
-import { decimalToHex } from '../../../shared/lib/transactions-controller-utils';
-import fetchWithCache from './fetch-with-cache';
+} from '../constants/swaps';
+import { SECOND } from '../constants/time';
+import { isValidHexAddress } from '../modules/hexstring-utils';
+import { addHexPrefix } from '../../app/scripts/lib/util';
+import fetchWithCache from '../../app/scripts/constants/fetch-with-cache';
+import { decimalToHex } from './transactions-controller-utils';
 
 const TEST_CHAIN_IDS = [RINKEBY_CHAIN_ID, LOCALHOST_CHAIN_ID];
 

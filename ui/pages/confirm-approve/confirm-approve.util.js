@@ -1,4 +1,4 @@
-import { calcTokenValue } from '../../../app/scripts/constants/swaps-utils';
+import { calcTokenValue } from '../../../shared/lib/swaps-utils';
 import { decimalToHex } from '../../../shared/lib/transactions-controller-utils';
 import { TRANSACTION_TYPES } from '../../../shared/constants/transaction';
 import { parseStandardTokenTransactionData } from '../../../shared/modules/transaction.utils';

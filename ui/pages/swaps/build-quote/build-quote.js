@@ -106,7 +106,7 @@ import SwapsFooter from '../swaps-footer';
 import { isEqualCaseInsensitive } from '../../../../shared/modules/string-utils';
 import { hexToDecimal } from '../../../../app/scripts/constants/metamask-controller-utils';
 import { calcTokenAmount } from '../../../../shared/lib/transactions-controller-utils';
-import { shouldEnableDirectWrapping } from '../../../../app/scripts/constants/swaps-utils';
+import { shouldEnableDirectWrapping } from '../../../../shared/lib/swaps-utils';
 
 const fuseSearchKeys = [
   { name: 'name', weight: 0.499 },

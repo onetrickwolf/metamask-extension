@@ -109,7 +109,7 @@ import {
   hexWEIToDecGWEI,
   toPrecisionWithoutTrailingZeros,
 } from '../../../../shared/lib/transactions-controller-utils';
-import { calcTokenValue } from '../../../../app/scripts/constants/swaps-utils';
+import { calcTokenValue } from '../../../../shared/lib/swaps-utils';
 import ViewQuotePriceDifference from './view-quote-price-difference';
 
 let intervalId;

@@ -26,7 +26,7 @@ import {
 import {
   fetchTradesInfo,
   shouldEnableDirectWrapping,
-} from '../../../app/scripts/constants/swaps-utils';
+} from '../../../shared/lib/swaps-utils';
 import {
   TOKENS,
   EXPECTED_TOKENS_RESULT,

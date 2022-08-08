@@ -40,7 +40,7 @@ import {
   getBaseApi,
   truthyString,
   validateData,
-} from '../../../app/scripts/constants/swaps-utils';
+} from '../../../shared/lib/swaps-utils';
 
 const CACHE_REFRESH_FIVE_MINUTES = 300000;
 const USD_CURRENCY_CODE = 'usd';
